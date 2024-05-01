@@ -19,30 +19,25 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-app.get("/about", (req, res) => {
-  res.render("about");
+app.get("/login", (req, res) => {
+  res.render("login");
 });
 
-// app.post("/create", (req, res) => {
-//   let { username, email, password } = req.body;
-//   bcrypt.genSalt(10, (err, salt) => {
-//     bcrypt.hash(password, salt, async (err, hash) => {
-//       let createdUser = await userModel.create({
-//         username,
-//         email,
-//         password: hash,
-//       });
-//       let token = jwt.sign({ email }, "secret");
-//       res.cookie("accessToken", token);
-//       res.send(createdUser);
-//     });
-//   });
-// });
+app.post("/login", async (req, res) => {
+  let { email, password } = req.body;
+  let user = await userModel.findOne({ email });
+  if (!user) return res.status(401).send("Something went wrong");
+  bcrypt.compare(password, user.password, function (err, result) {
+    if (result) res.status(200).send("you can login");
+    else res.redirect("/login");
+  });
+});
 
 app.post("/register", async (req, res) => {
   let { username, name, age, email, password } = req.body;
 
   let user = await userModel.findOne({ email });
+
   if (user) return res.status(500).send("User already registered");
 
   bcrypt.genSalt(10, (err, salt) => {
@@ -57,6 +52,7 @@ app.post("/register", async (req, res) => {
 
       let token = jwt.sign({ email, userId: user._id }, "secret");
       res.cookie("accessToken", token);
+
       res.send("registered");
     });
   });
