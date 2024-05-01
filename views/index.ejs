@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="stylesheets/styles.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <div class="w-full bg-zinc-500">
+      <nav class="flex justify-between p-5 items-center">
+        <a class="text-white">Logo</a>
+        <a class="bg-zinc-200 px-5 py-2 rounded-md">Login</a>
+      </nav>
+    </div>
+
+    <div class="h-screen flex justify-center bg-zinc-100">
+      <form action="/create" method="post" class="p-10 bg-zinc-200 mt-5">
+        <input
+          type="text"
+          name="name"
+          placeholder="Enter name"
+          class="border-2 border-gray-200 p-2 rounded-md mb-3 outline-none"
+        />
+        <br />
+        <input
+          type="text"
+          name="username"
+          placeholder="Enter user name"
+          class="border-2 border-gray-200 p-2 rounded-md mb-3 outline-none"
+        />
+        <br />
+        <input
+          type="email"
+          name="email"
+          placeholder="enter email"
+          class="border-2 border-gray-200 p-2 rounded-md mb-3 outline-none"
+        />
+        <br />
+        <input
+          type="password"
+          name="password"
+          placeholder="enter password"
+          class="border-2 border-gray-200 p-2 rounded-md mb-3 outline-none"
+        />
+        <br />
+        <input
+          type="submit"
+          value="Create User"
+          class="w-full bg-blue-400 px-4 py-2 text-white rounded-md mt-5"
+        />
+      </form>
+    </div>
+  </body>
+</html>
